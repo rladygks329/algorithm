@@ -1,4 +1,6 @@
 # leetcode
-https://leetcode.com/
+problem site : https://leetcode.com/
+velog : https://velog.io/@rladygks329
+
 algorithm solving
-top_interview 
+top_interview  
