@@ -1,21 +1,23 @@
 import sys
-# 4 7
-# 20 15 10 17
 
 num, target = map(int, sys.stdin.readline().split())
 data = list(map(int, sys.stdin.readline().split()))
 
-data.sort(reverse=True)
+def calc(n):
+    sum = 0
+    for i in data:
+        if(i>n):
+            sum += i-n
+    return sum
 
-step = 1
-index = 0
-cur = 0
-while(cur < target):
-    cur += step
-    data[index] -= 1
-    if(data[index] == 0 or cur >= target):
-        break
-    if(data[index] <= data[index+1]):
-        step += 1
-        index += 1
-print(data[index])
+start = 0
+end = max(data)
+while(start <= end):
+    mid = (start + end)//2
+    if(calc(mid) < target):
+        end = mid - 1
+    else:
+        start = mid + 1
+
+print(end)
+
