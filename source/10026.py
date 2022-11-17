@@ -4,13 +4,12 @@ data = []
 
 
 def DFS():
-    # _map[h][w]
-    w, h = len(data[0]), len(data)
-    visit = [[False for j in range(w)] for i in range(h)]
+    n = len(data)
+    visit = [[False for j in range(n)] for i in range(n)]
     count = 0
 
-    for i in range(h):
-        for j in range(w):
+    for i in range(n):
+        for j in range(n):
             if(visit[i][j]):
                 continue
             s = [(i, j)]
@@ -22,7 +21,7 @@ def DFS():
                 for c, d in [(1, 0), (-1, 0), (0, 1), (0, -1)]:
                     if(a + c < 0 or b + d < 0):
                         continue
-                    if(a + c >= h or b + d >= w):
+                    if(a + c >= n or b + d >= n):
                         continue
                     if(visit[a+c][b+d] == False and data[a+c][b+d] == letter):
                         visit[a+c][b+d] = True
@@ -32,6 +31,7 @@ def DFS():
 
 if __name__ == "__main__":
     n = int(input())
+
     for i in range(n):
         data.append(sys.stdin.readline().rstrip())
     print(DFS())
