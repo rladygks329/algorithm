@@ -1,0 +1,19 @@
+import sys
+from heapq import heappop, heappush
+
+_ = int(sys.stdin.readline())
+arr = []
+
+for _ in range(_):
+    n = int(sys.stdin.readline())
+    if(n == 0):
+        if(arr):
+            print(arr[0][1])
+            heappop(arr)
+        else:
+            print(0)
+    elif(n < 0):
+        heappush(arr, (-n, n))
+    else:
+        heappush(arr, (n, n))      
+    
