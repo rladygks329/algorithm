@@ -5,17 +5,11 @@ arr = sys.stdin.read().splitlines()
 
 limit = max(m, m)
 ans = 0
-for i in range(n):
-    for j in range(m):
-        cur = arr[i][j]
-        for k in range(limit):
-            if i+k >= n or j+k >= m:
-                continue
-            if cur != arr[i + k][j]:
-                continue
-            if cur != arr[i][j + k]:
-                continue
-            if cur != arr[i + k][j + k]:
-                continue
-            ans = max(k+1, ans)
-print(ans**2)
+
+for size in range(limit, -1, -1):
+    for i in range(n-size):
+        for j in range(m-size):
+            if arr[i][j] == arr[i+size][j] == arr[i][j+size] == arr[i+size][j+size]:
+                print((size+1)**2)
+                sys.exit()
+
