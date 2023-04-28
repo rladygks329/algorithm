@@ -1,21 +1,21 @@
 import sys
 import math
-from collections import deque
 n = int(sys.stdin.readline())
 
 def solve(n):
-    q = deque()
-    q.append((n, 0))
+    if math.sqrt(n).is_integer():
+        return 1
 
-    while q:
-        cur, length = q.popleft()
-        for i in range(int(math.sqrt(cur))+1, 0, -1):
-            if cur - i*i == 0 and length < 4:
-                print(length + 1)
-                return
-            elif cur - i*i > 0 and length < 4:
-                q.append((cur-i*i, length + 1))
-solve(n)
-# bfs로 푼다고 하면
-# 1번 노드를 방문 count = 1
-# n - i*i >= 0
+    s = {i**2 for i in range(1, int(math.sqrt(n)) + 1)}
+
+    for a in s:
+        if n - a in s:
+            return 2
+
+    for a in s:
+        for b in s:
+            if n - a - b in s:
+                return 3
+    return 4
+
+print(solve(n))
