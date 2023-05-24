@@ -1,14 +1,12 @@
+import sys
 from collections import deque
-
 
 def D(n):
     return (n * 2) % 10000
 
 
 def S(n):
-    if(n == 0):
-        return 9999
-    return n-1
+    return 9999 if n == 0 else n-1
 
 
 def L(n):
@@ -29,25 +27,37 @@ def R(n):
     return n
 
 
-n = int(input())
-for i in range(n):
-    a, target = map(int, input().split())
+n = int(sys.stdin.readline())
+for _ in range(n):
+    start, target = map(int, sys.stdin.readline().split())
+    visit = [False] * 10001
+    visit[start] = 1
     q = deque()
-    visit = [False for i in range(10001)]
-    ans = ["" for i in range(10001)]
+    q.append([start, ""])
 
-    visit[a] = True
-    q.append((a, ans[a]))
+    while q:
+        cur, ans = q.popleft()
 
-    while(not visit[target] and q):
-        n, before = q.popleft()
-        #print(f'n : {n}, before: {before}')
-        arr = [(D(n), before + "D"), (S(n), before + "S"),
-               (L(n), before + "L"), (R(n), before + "R")]
-        #print(f'arr : {arr}')
-        for i, j in arr:
-            if(visit[i] == False):
-                visit[i] = True
-                ans[i] = j
-                q.append((i, j))
-    print(ans[target])
+        if cur == target:
+            print(ans)
+            break
+
+        d = D(cur)
+        if not visit[d]:
+            visit[d] = True
+            q.append([d, ans + "D"])
+
+        s = S(cur)
+        if not visit[s]:
+            visit[s] = True
+            q.append([s, ans + "S"])
+
+        l = L(cur)
+        if not visit[l]:
+            visit[l] = True
+            q.append([l, ans + "L"])
+
+        r = R(cur)
+        if not visit[r]:
+            visit[r] = True
+            q.append([r, ans + "R"])
