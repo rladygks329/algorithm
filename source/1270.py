@@ -4,21 +4,23 @@ T = int(sys.stdin.readline())
 
 for _ in range(T):
     arr = list(map(int, sys.stdin.readline().split()))[1:]
-    s = {}
 
-    length = len(arr)//2
-    hasWinner = False
-    answer = 0
+    major = 0
+    count = 0
 
     for num in arr:
-        if num in s:
-            s[num] += 1
+        if count == 0:
+            major = num
+            count = 1
+        elif major == num:
+            count += 1
         else:
-            s[num] = 1
+            count -= 1
 
-    for num, count in s.items():
-        if count > length:
-            hasWinner = True
-            answer = num
+    length = len(arr)//2
+    count = 0
+    for num in arr:
+        if num == major:
+            count += 1
 
-    print(answer if hasWinner else "SYJKGW")
+    print(major if count > length else "SYJKGW")
