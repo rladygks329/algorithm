@@ -1,0 +1,37 @@
+import sys
+
+n = int(sys.stdin.readline())
+if n == 1:
+    print(0)
+    sys.exit()
+
+tree = [[] for i in range(n+1)]
+for _ in range(n-1):
+    parent, child, weight = map(int, sys.stdin.readline().split(" "))
+    tree[parent].append((weight, child))
+    tree[child].append((weight, parent))
+
+def DFS(a):
+    INF = 100_000_000
+    distance = [INF for i in range(n+1)]
+    distance[a] = 0
+    s = [(a, 0)]
+
+    while s:
+        cur, dis = s.pop()
+        for weight, nxt in tree[cur]:
+            if distance[nxt] > dis + weight:
+                distance[nxt] = dis + weight
+                s.append((nxt, dis + weight))
+
+    dist = distance[1]
+    index = 1
+    for i in range(2, n+1):
+        if distance[i] > dist:
+            dist = distance[i]
+            index = i
+    return (index, dist)
+
+node, distance = DFS(1)
+node, distance = DFS(node)
+print(distance)
