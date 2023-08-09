@@ -1,6 +1,9 @@
-# leetcode
-problem site : https://leetcode.com/
-velog : https://velog.io/@rladygks329
+problem site
+- leetcode
+- baekjoon (solved.ac)
+- programmers
 
-algorithm solving
-top_interview  
+
+leetcode -> top interview 100 문제 (난이도 easy)<br>
+baekjoon -> solved.ac (level 4 진행중)<br>
+programmers -> (진행 예정)
