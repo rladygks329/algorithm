@@ -1,12 +1,12 @@
 import sys
 
 def find_optimal_L_W(stations):
-    xs = sorted([x for x, y in stations])
-    ys = sorted([y for x, y in stations])
+    xs = [x for x, y in stations]
+    ys = [y for x, y in stations]
     n = len(stations)
 
-    cx = (xs[0] + xs[-1])//2
-    cy = (ys[0] + ys[-1])//2
+    cx = (min(xs) + max(xs))//2
+    cy = (min(ys) + max(ys))//2
 
     L = max(abs(x - cx) for x, _ in stations)
     W = max(abs(y - cy) for _, y in stations)
